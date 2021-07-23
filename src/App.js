@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import PhotoList from './components/PhotoList'
-import PhotoDetail from './components/PhotoDetail'
+import PostList from './components/PostList'
+import PostDetail from './components/PostDetail'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
  
 function App() {
 
   const [posts, setPosts] = useState([])
 
-  const getPhotos = () => {
+  const listPost = () => {
     fetch('https://jsonplaceholder.typicode.com/posts')
     .then( (res) => res.json())
     .then( data => {
@@ -18,19 +18,20 @@ function App() {
     });
     
   }
-  
+
   useEffect( ()=> {
-    getPhotos()
+    listPost()
   }, [])
+  
 
   return (
     <BrowserRouter>
         <Switch>
           <Route exact path='/'>
-              <PhotoList posts={posts} />
+              <PostList posts={posts} />
           </Route>
           <Route exact path='/posts/:id'>
-              <PhotoDetail />
+              <PostDetail />
           </Route>
         </Switch>
     </BrowserRouter>
